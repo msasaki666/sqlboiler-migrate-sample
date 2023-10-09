@@ -1,3 +1,7 @@
+volumes:
+  db-data:
+
+
 services:
   app:
     image: sqlboiler-migrate-sample
@@ -9,3 +13,13 @@ services:
     volumes:
       - .:/app
     command: tail -f /dev/null
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app_database
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
