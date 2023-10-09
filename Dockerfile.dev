@@ -12,4 +12,9 @@ RUN go install github.com/ramya-rao-a/go-outline@latest && \
   mkdir golang-migrate-tmp-dir && \
   curl -L https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xvz -C golang-migrate-tmp-dir && \
   mv golang-migrate-tmp-dir/migrate /usr/local/bin/migrate && \
-  rm -rf golang-migrate-tmp-dir
+  rm -rf golang-migrate-tmp-dir && \
+  # migrateには不要。デバッグ用
+  apt-get update && \
+  apt-get install -y postgresql-client && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
